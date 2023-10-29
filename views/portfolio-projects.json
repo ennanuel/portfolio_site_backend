@@ -1,0 +1,124 @@
+[
+  {
+    "codepenLink": "https://codepen.io/ennanuel/pen/gOezKRd?editors=0100",
+    "description": "A simple Calculator app created using HTML JavaScript and CSS. This was a FreeCodeCamp project I completed. Although it seems simple",
+    "gitLink": "",
+    "mainLink": "https://codepen.io/ennanuel/full/gOezKRd",
+    "name": "JS Calculator",
+    "progress": "finished",
+    "stack": [
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "type": "secondary"
+  },
+  {
+    "codepenLink": "https://codepen.io/ennanuel/pen/XWEEEpY",
+    "description": "A beat making app produced using JavaScript HTML and CSS. This app although simple looking helped understand the concept of event listeners.",
+    "gitLink": "",
+    "mainLink": "https://codepen.io/ennanuel/full/XWEEEpY",
+    "name": "Beat O' Matic 5000",
+    "progress": "finished",
+    "stack": [
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "type": "secondary"
+  },
+  {
+    "codepenLink": "https://codepen.io/ennanuel/pen/wvmXdmR?editors=1100",
+    "description": "A simple timer app. That can be used to create a count-down timer. This project introduced me to font-awesome icons and JavaScript event listenters.",
+    "gitLink": "",
+    "mainLink": "https://codepen.io/ennanuel/full/wvmXdmR",
+    "name": "Shitty Timer",
+    "progress": "finished",
+    "stack": [
+      "HTML",
+      "JavaScript",
+      "CSS"
+    ],
+    "type": "secondary"
+  },
+  {
+    "description": "A personal website built for Robert Orji, a digital artist using ReactJS.",
+    "gitLink": "https://github.com/ennanuel/rob_portfolio_2.0",
+    "image": "New Project (2).png",
+    "mainLink": "https://artrobd.netlify.app",
+    "name": "Robert Orji",
+    "progress": "finished",
+    "stack": [
+      "ReactJS",
+      "CSS",
+      "HTML",
+      "Vite"
+    ],
+    "type": "main"
+  },
+  {
+    "description": "This is is best project till date, it was created using React. The Express backend was hosted locally. I applied some interesting visual ideas like the dynamic background.",
+    "gitLink": "https://github.com/ennanuel/portfolio2",
+    "image": "New Project.png",
+    "mainLink": "https://ezema.netlify.app",
+    "name": "Ezema",
+    "progress": "finished",
+    "stack": [
+      "ReactJS",
+      "SASS",
+      "Firebase",
+      "Express",
+      "NodeJS",
+      "HTML",
+      "CSS"
+    ],
+    "type": "main"
+  },
+  {
+    "description": "A shopping cart UI built using Redux toolkit and react. It also connects to a Firebase database using Fetch API.",
+    "gitLink": "https://github.com/ennanuel/redux_tut_1",
+    "image": "New Project.png",
+    "mainLink": "glistening-croquembouche-7fbef6.netlify.app",
+    "name": "Redux Shopping Cart",
+    "progress": "finished",
+    "stack": [
+      "Redux",
+      "ReactJS",
+      "",
+      "Firebase",
+      "HTML",
+      "CSS"
+    ],
+    "type": "secondary"
+  },
+  {
+    "codepenLink": "https://codepen.io/ennanuel/full/MWVQPbb",
+    "description": "A simple web app created using HTML, CSS and JavaScript for a FreeCodeCamp challenge. It displays random quotes.",
+    "gitLink": "",
+    "mainLink": "https://codepen.io/ennanuel/full/MWVQPbb",
+    "name": "Random Quote Generator",
+    "progress": "finished",
+    "stack": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "type": "secondary"
+  },
+  {
+    "description": "A music streaming web app created using Dezeer API, Redux, ReactJS and Tailwind. This was a fun project to build, because it gave me a good understanding on how APIs work and and how to use them.",
+    "gitLink": "https://github.com/ennanuel/Ridm",
+    "image": "New Project (1).png",
+    "mainLink": "http://ridm.netlify.app",
+    "name": "Ridm.",
+    "progress": "finished",
+    "stack": [
+      "ReactJS",
+      "Tailwind",
+      "API",
+      "DeezerAPI",
+      "Redux"
+    ],
+    "type": "main"
+  }
+]

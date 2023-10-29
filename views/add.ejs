@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Upload Project</title>
+</head>
+<body class="h-[100vh] bg-gray-800 p-4 pt-0 pb-4 text-highlight-500 grid grid-rows-[auto,1fr] gap-4">
+    <header class="sticky top-0 mt-4">
+        <nav class="rounded-xl flex items-center justify-between h-[60px] gap-4">
+            <div class="flex items-center justify-center h-[60px] pr-1 aspect-square rounded-lg bg-gray-900 shadow shadow-black/50 border border-gray-800">
+                <img src="/icon-light.png" alt="logo" class="w-[40px] h-auto">
+            </div>
+            <ul class="flex flex-1 justify-center items-center gap-4 h-[60px] px-4 rounded-lg bg-gray-900 border border-gray-800 shadow shadow-black/50">
+                <a href="/project/page/add" class="font-semibold h-[40px] px-4 rounded-sm bg-highlight-400 text-gray-900 flex justify-center items-center">Add Project</a>
+                <a href="/project/page/edit" class="font-semibold h-[40px] px-4 rounded-sm bg-highlight-400/10 text-highlight-700 flex justify-center items-center">View Projects</a>
+            </ul>
+            <button class="flex items-center justify-center gap-2 aspect-square w-[60px] px-4 rounded-lg bg-highlight-400 font-bold text-gray-900  border border-gray-800 shadow shadow-black/50">
+                <i class="fa fa-external-link text-2xl"></i>
+            </button>
+        </nav>
+    </header>
+    <section class="bg-gray-900 rounded-md p-4 h-full overflow-y-scroll overflow-x-clip">
+        <form action="/project/upload" method="POST" class="w-full flex flex-col gap-4" enctype="multipart/form-data">
+            <div class="flex items-center justify-between">
+                <h3 class="text-3xl font-bold">Add Project</h3>
+                <button class="font-bold px-4 rounded-md py-2 bg-highlight-400 text-gray-900">Save Project</button>
+            </div>
+            <div class="flex flex-col-reverse lg:flex-row gap-4 justify-stretch mt-4">
+                <div class="flex flex-1 flex-col gap-4">
+                    <input type="text" name="name" placeholder="Name" class="bg-highlight-500/10 block px-4 h-[50px] rounded-md placeholder:text-highlight-500 shadow shadow-black/40" />
+                    <textarea name="desc" placeholder="Description" class="bg-highlight-500/10 block px-4 py-2 h-[100px] rounded-md placeholder:text-highlight-500 shadow shadow-black/40"></textarea>
+                    <input type="url" name="demo_link" placeholder="Demo Link" class="bg-highlight-500/10 block px-4 h-[50px] rounded-md placeholder:text-highlight-500 shadow shadow-black/40" />
+                    <div class="flex gap-4">
+                        <input type="url" name="code_link" placeholder="Codebase Link" class="bg-highlight-500/10 flex-1 block px-4 h-[50px] rounded-md placeholder:text-highlight-500 shadow shadow-black/40" />
+                        <input type="radio" id="is_github" value="true" name="is_github_link" checked="true" class="project_link hidden" />
+                        <label for="is_github" class="cursor-pointer bg-highlight-500/10 flex items-center justify-center px-4 h-[50px] w-[50px] rounded-md placeholder:text-highlight-500">
+                            <i class="fa fa-github text-2xl"></i>
+                        </label>
+                        <input type="radio" id="is_codepen" value="false" name="is_github_link" class="project_link hidden" />
+                        <label for="is_codepen" class="cursor-pointer bg-highlight-500/10 flex items-center justify-center px-4 h-[50px] w-[50px] rounded-md placeholder:text-highlight-500">
+                            <i class="fa fa-codepen text-2xl"></i>
+                        </label>
+                    </div>
+                    <div class="flex gap-4">
+                        <input type="stack" placeholder="Stacks Used" id="stack" class="flex-1 bg-highlight-500/10 block px-4 h-[50px] rounded-md placeholder:text-highlight-500" />
+                        <button type="button" id="add_btn" class="bg-highlight-500 text-gray-900 font-bold block px-4 h-[50px] aspect-square rounded-md placeholder:text-highlight-500"><i class="fa fa-plus"></i></button>
+                    </div>
+                    <div class="flex flex-col">
+                        <div id="stacks_container" class="flex gap-x-4 flex-wrap">
+                            <button class="hidden mb-4 gap-2 border-highlight-800 pl-2 border-transparent hover:border-red-500 hover:opacity-80 h-[35px] pointer-events-none">
+                            </button>
+                        </div>
+                        <div class="flex gap-4">
+                            <input type="radio" id="is_main" value="true" name="is_main_project" checked="true" class="project_link hidden" />
+                            <label for="is_main" class="cursor-pointer flex-1 bg-highlight-500/10 flex items-center justify-center gap-1 px-4 h-[50px] rounded-md placeholder:text-highlight-500">Main Project</label>
+                            <input type="radio" id="is_sec" value="false" name="is_main_project" class="project_link hidden" />
+                            <label for="is_sec" class="cursor-pointer flex-1 bg-highlight-500/10 flex items-center justify-center gap-1 px-4 h-[50px] rounded-md placeholder:text-highlight-500">Other Project</label>
+                        </div>  
+                    </div>               
+                </div>
+                <div class="flex flex-1 flex-col gap-4">
+                    <h3 class="text-2xl font-bold">Project Icon</h3>
+                    <label for="icon" class="cursor-pointer relative w-[100px] aspect-square flex flex-col items-center justify-center gap-2 border border-dashed bg-highlight-500/10 rounded-md">
+                        <p class="font-semibold">Add Image</p>
+                        <input type="file" name="icon" id="icon" class="hidden file" accept="image/jpeg, image/png, image/jpg" />
+                        <img id="project_icon" src="" alt="" class="absolute top-0 left-0 h-full w-full object-cover opacity-0">
+                    </label>
+                    <h3 class="text-2xl font-bold mt-4">Project Images</h3>
+                    <label id="project_images" class="grid grid-cols-3 gap-4">
+                        <div for="images" class="cursor-pointer aspect-square w-full flex flex-col items-center justify-center gap-2 border border-dashed bg-highlight-500/10 rounded-md">
+                            <p class="font-semibold">Add Image</p>
+                            <input type="file" id="images" name="images" class="hidden file" accept="image/jpeg, image/png, image/jpg" multiple />
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </form>
+    </section>
+</body>
+<script src="/script.js"></script>
+</html>
