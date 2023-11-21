@@ -1,0 +1,175 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Document</title>
+ </head>
+ <body>
+    <section class="h-[100vh] bg-gray-2000 grid grid-rows-[auto,1fr,1fr] grid-cols-6 p-4 gap-4">
+        <nav class="col-span-6 h-[60px] flex items-center justify-between gap-4 px-2">
+            <div class="animate-icon w-[50px] h-[50px] relative">
+                <div class="first rotate absolute w-full h-full top-0 left-0"></div>
+                <div class="second rotate absolute w-full h-full top-0 left-0"></div>
+                <div class="third rotate absolute w-full h-full top-0 left-0"></div>
+                <div class="icon w-full h-full relative flex flex-col items-center justify-center rounded-full z-1 bg-white">
+                    <img class="w-[50px] aspect-square block mr-2" src="/icon-dark.png" />
+                </div>
+            </div>
+            <ul class="flex-1 flex items-center gap-6 font-bold ml-4">
+                <li>Home</li>
+                <li>About</li>
+                <li>Projects</li>
+                <li>Contact</li>
+            </ul>
+            <div class="flex items-center gap-4">
+                <button class="p-1 font-bold bg-black rounded-[5px]">
+                    <span class="flex items-center justify-center h-[40px] rounded-[3px] px-4 mb-1 bg-yellow-300">Resume</span>
+                </button>
+                <div class="h-[40px] w-[80px] rounded-[20px] p-1 bg-black">
+                    <div class="h-[32px] aspect-square rounded-full bg-white"></div>
+                </div>
+            </div>
+        </nav>
+        <article class="row-span-2 col-span-3 rounded-[20px] bg-black pl-2 p-1">
+            <div class="w-full h-full relative bg-white flex flex-col gap-1 rounded-[15px] p-4 overflow-hidden">
+                <div 
+                    style="background-image: radial-gradient(yellow 100px, gold 150px, red 200px, purple 250px, transparent 300px); filter: blur(50px); background-repeat: no-repeat"
+                    class="absolute w-full h-full top-[50%] right-[50%] opacity-80"></div>
+                <div class="relative z-1 flex-1 flex flex-col justify-center">
+                    <div class="flex gap-6 items-center">
+                        <div class="w-[70px] h-[70px] rounded-full bg-yellow-400 border-4 border-black"></div>
+                        <div class="flex flex-col">
+                            <p class="text-xl font-bold">Hey There!</p>
+                            <h2 style="line-height: 3rem;" class="text-[3rem] font-extrabold">I'm Emmanuel</h2>
+                        </div>
+                    </div>
+                    <p class="text-xl font-semibold mt-8">A Full-stack Developer mainly focused on React for frontend and NodeJS for backend.</p>
+                    <div class="flex items-center justify-start gap-4 mt-6">
+                        <button class="p-1 font-bold bg-black rounded-[5px]">
+                            <span class="flex items-center justify-center h-[40px] rounded-[3px] px-4 mb-1 bg-purple-400">My Projects</span>
+                        </button>
+                        <button class="p-1 font-bold bg-black rounded-[5px]">
+                            <span class="flex items-center justify-center h-[40px] rounded-[3px] px-4 mb-1 bg-blue-400">Contact Me</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex gap-3 relative z-1">
+                    <button class="bg-black p-1 rounded-full">
+                        <span class="flex w-[40px] aspect-square rounded-full bg-white"></span>
+                    </button>
+                    <button class="bg-black p-1 rounded-full">
+                        <span class="flex w-[40px] aspect-square rounded-full bg-white"></span>
+                    </button>
+                    <button class="bg-black p-1 rounded-full">
+                        <span class="flex w-[40px] aspect-square rounded-full bg-white"></span>
+                    </button>
+                    <button class="bg-black p-1 rounded-full">
+                        <span class="flex w-[40px] aspect-square rounded-full bg-white"></span>
+                    </button>
+                </div>
+            </div>
+        </article>
+        <article class="rounded-[20px] bg-black p-1 pl-2 col-span-3">
+            <div class="p-3 rounded-[15px] flex flex-col items-end justify-between bg-purple-600 text-white h-full">
+                <p>Short bio</p>
+                <h3 class="text-4xl font-bold uppercase">About</h3>
+            </div>
+        </article>
+        <article class="rounded-[20px] bg-black p-1 pl-2">
+            <div class="p-3 rounded-[15px] flex flex-col items-end justify-between bg-yellow-300 h-full">
+                <p>Short bio</p>
+                <h3 class="text-4xl font-bold uppercase">About</h3>
+            </div>
+        </article>
+        <article class="rounded-[20px] bg-black p-1 pl-2">
+            <div class="p-3 rounded-[15px] flex flex-col items-end justify-between bg-blue-300 h-full">
+                <p>Short bio</p>
+                <h3 class="text-4xl font-bold uppercase">About</h3>
+            </div>
+        </article>
+        <article class="rounded-[20px] bg-black p-1 pl-2">
+            <div class="p-3 rounded-[15px] flex flex-col items-end justify-between bg-green-400 h-full">
+                    
+                <p>Short bio</p>
+                <h3 class="text-4xl font-bold uppercase">About</h3>
+            </div>
+        </article>
+    </section>
+    <section class="h-[100vh] bg-black grid grid-rows-[auto,1fr] gap-2 p-2">
+        <nav class="h-[70px] flex items-center justify-between gap-4 px-4 rounded-lg bg-white">
+        <div class="animate-icon w-[50px] h-[50px] relative">
+            <div class="first rotate absolute w-full h-full top-0 left-0"></div>
+            <div class="second rotate absolute w-full h-full top-0 left-0"></div>
+            <div class="third rotate absolute w-full h-full top-0 left-0"></div>
+            <div class="icon w-full h-full relative flex flex-col items-center justify-center rounded-full z-1 bg-white">
+                <img class="w-[50px] aspect-square block mr-2" src="/icon-dark.png" />
+            </div>
+        </div>
+        <ul class="flex-1 flex items-center gap-6 font-bold ml-4">
+            <li>Home</li>
+            <li>About</li>
+            <li>Projects</li>
+            <li>Contact</li>
+        </ul>
+        <div class="flex items-center gap-4">
+            <button class="p-1 font-bold bg-black rounded-[5px]">
+                <span class="flex items-center justify-center h-[40px] rounded-[3px] px-4 mb-1 bg-yellow-300">Resume</span>
+            </button>
+            <div class="h-[40px] w-[80px] rounded-[20px] p-1 bg-black">
+                <div class="h-[32px] aspect-square rounded-full bg-white"></div>
+            </div>
+        </div>
+        </nav>
+        <article class="bg-white flex items-stretch justify-between rounded-lg overflow-hidden">
+            <div class="relative flex flex-col gap-1 p-4">
+            <div style="background-image: radial-gradient(yellow 100px, gold 150px, red 200px, purple 250px, transparent 300px); filter: blur(50px); background-repeat: no-repeat"
+                class="absolute w-full h-full top-[50%] right-[50%] opacity-80"></div>
+            <div class="relative z-1 flex-1 flex flex-col justify-center">
+                <div class="flex gap-6 items-center">
+                    <div class="w-[120px] aspect-square rounded-full bg-yellow-400 border-4 border-black"></div>
+                    <div class="flex flex-col">
+                        <p class="text-3xl font-bold">Hey There!</p>
+                        <h2 style="line-height: 5rem;" class="text-[5rem] font-extrabold">I'm Emmanuel</h2>
+                    </div>
+                </div>
+                <p class="text-3xl font-semibold mt-8 max-w-[600px]">A Full-stack Developer mainly focused on React for frontend and NodeJS for
+                    backend.</p>
+                <div class="flex items-center justify-start gap-4 mt-6">
+                    <button class="p-1 font-bold bg-black rounded-[5px]">
+                        <span class="flex items-center justify-center h-[40px] rounded-[3px] px-4 mb-1 bg-purple-400">My
+                            Projects</span>
+                    </button>
+                    <button class="p-1 font-bold bg-black rounded-[5px]">
+                        <span class="flex items-center justify-center h-[40px] rounded-[3px] px-4 mb-1 bg-blue-400">Contact
+                            Me</span>
+                    </button>
+                </div>
+            </div>
+            <div class="flex gap-3 relative z-1">
+                <button class="bg-black p-1 rounded-full">
+                    <span class="flex w-[40px] aspect-square rounded-full bg-white"></span>
+                </button>
+                <button class="bg-black p-1 rounded-full">
+                    <span class="flex w-[40px] aspect-square rounded-full bg-white"></span>
+                </button>
+                <button class="bg-black p-1 rounded-full">
+                    <span class="flex w-[40px] aspect-square rounded-full bg-white"></span>
+                </button>
+                <button class="bg-black p-1 rounded-full">
+                    <span class="flex w-[40px] aspect-square rounded-full bg-white"></span>
+                </button>
+            </div>
+        </div>
+            <div class="animate-icon w-[250px] h-[250px] relative">
+                <div class="first rotate absolute w-full h-full top-0 left-0"></div>
+                <div class="second rotate absolute w-full h-full top-0 left-0"></div>
+                <div class="third rotate absolute w-full h-full top-0 left-0"></div>
+                <div class="icon w-full h-full relative flex flex-col items-center justify-center rounded-full z-1 bg-blue-400">
+                </div>
+            </div>
+        </article>
+    </section>
+ </body>
+ </html>

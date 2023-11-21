@@ -25,3 +25,46 @@
 .invisible_scroll::-webkit-scrollbar-track {
     background-color: transparent;
 }
+
+.rotate {
+    animation: rotate 5s linear infinite;
+}
+
+.rotate.first {
+    animation-duration: 3s
+}
+
+.rotate.second {
+    animation-duration: 3.5s
+}
+
+.rotate.third {
+    animation-duration: 4s
+}
+
+.rotate:before {
+    @apply w-full h-full rounded-full absolute top-0 left-0;
+    content: '';
+}
+
+.rotate.first:before {
+    @apply left-1 top-1 bg-blue-400/80;
+}
+
+.rotate.second:before {
+    @apply top-1 right-1 bg-purple-500/80;
+}
+
+.rotate.third:before {
+    @apply bottom-1 left-1 bg-blue-600/80;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
