@@ -1,19 +1,20 @@
 const router = (require('express')).Router();
 const axios = require('axios');
-const uploadMiddleware = require('../utils/project');
+const { uploadMiddleware } = require('../utils/upload');
+const projects = require('../views/portfolio-projects.json');
+
+router.get('/page/add', (req, res) => res.render('add'));
+router.get('/page/edit', (req, res) => res.render('edit'));
 
 router.get('/', async function (req, res) {
     try {
-        const projects = await axios.get(process.env.FIREBASE_DB_URL);
+        // const projects = await axios.get(process.env.FIREBASE_DB_URL);
         return res.status(200).json(projects);
     } catch (error) {
-        return res.status(500).json({ message: 'Could not fetch projects' });
+        console.error(error);
+        return res.status(500).json({ message: error.message });
     }
 });
-
-router.get('/page/add', (req, res) => res.render('add'));
-
-router.get('/page/edit', (req, res) => res.render('edit'));
 
 router.post('/upload', uploadMiddleware, async function (req, res) {
     try {
@@ -22,7 +23,7 @@ router.post('/upload', uploadMiddleware, async function (req, res) {
         const previousProjects = result.data || [];
         const newValues = [...previousProjects, project];
         await axios.put(process.env.FIREBASE_DB_URL, newValues);
-        res.send('Project uplaoded')
+        res.send('Project uplaoded');
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Could not upload project' });
