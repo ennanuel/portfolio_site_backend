@@ -125,4 +125,4 @@ function handleDragEnd(event) {
 // REMOVE MESSAGE
 
 var message = document.getElementById('message');
-document.getElementById('close_btn').addEventListener('click', () => message.remove());
+document.getElementById('close_btn')?.addEventListener('click', () => message.remove());
