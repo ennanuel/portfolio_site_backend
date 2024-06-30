@@ -20,7 +20,6 @@ const upload = multer({
 
 const uploadToCloud = (file) => new Promise(
     async function (resolve, reject) {
-        console.warn('uploading...');
         try {
             const { uploader } = cloudinary;
             const parser = new DatauriParser();
@@ -37,6 +36,15 @@ const uploadToCloud = (file) => new Promise(
     }
 );
 
+async function handleDelete(file) {
+    try {
+        await cloudinary.uploader.destroy(file);
+        console.log('%s deleted', file);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 function getFolderName(fieldname) {
     return fieldname === 'icon' ? 'project_icons' : 'project_images';
 }
@@ -47,7 +55,8 @@ function validateValues(values) {
         if (!values) throw new Error('There are no values');
         const valuesEntries = Object.entries(values);
         for (let [entry, value] of valuesEntries) {
-            if (!value || value?.length < 1) throw new Error(`${entry} field cannot be empty!`);
+            if (entry === 'images' || entry === 'icon') continue;
+            else if (!value || value?.length < 1) throw new Error(`${entry} field cannot be empty!`);
         }
     } catch (error) {
         failed = true;
@@ -64,57 +73,70 @@ function handleError({err, failed, msg}) {
     return error;
 }
 
-async function handleFilesUpload(files) {
-    const fileFields = Object.entries(files);
-    const result = { icon: [], images: [] };
-    for (let [key, values] of fileFields) {
-        if (values?.length < 1) continue;
+async function handleFilesUpload(files, body) {
+    const result = { icon: [], images: [], ...(files || {}) };
+
+    for (let [key, values] of Object.entries(result)) {
+        const oldValues = body[`old_${key}`] || [];
+
+        if (values?.length < 1) {
+            result[key] = oldValues;
+            continue;
+        }
+        
+        const filesToDelete = oldValues.map(handleDelete);
         const filesToUpload = values.map(uploadToCloud);
         const uploadedFiles = await Promise.all(filesToUpload);
         result[key] = uploadedFiles;
+
+        if (oldValues.length > 0) await Promise.all(filesToDelete);
     }
+
     return result;
 };
 
 function convertStringToBoolean(booleanString) {
     const stringToConvert = booleanString?.toLowerCase();
-    if (!['true', 'false'].includes(stringToConvert)) return false;
+    if (!/(true|false)/i.test(stringToConvert)) return false;
     return stringToConvert === 'true';
 }
 
 function createProject(values) {
-    let project;
     try {
         if (!values) throw new Error('No "value" argument found');
-        project = { ...values };
+        const project = { ...values };
         const { is_github_link, is_main_project, images = [], icon = [], stacks = [] } = project;
+        delete project.old_icon;
+        delete project.old_images;
         project.is_github_link = convertStringToBoolean(is_github_link);
         project.is_main_project = convertStringToBoolean(is_main_project);
         project.icon = icon[0];
         project.images = images;
         project.stacks = stacks;
+        project.rank = 0;
+        return project;
     } catch (error) {
-        project = { error: error.message };
+        throw error;
     }
-    return project
 };
 
 function uploadMiddleware(req, res, next) {
-    upload(req, res, async (err) => {
+    upload(req, res, async function (err) {
         try {
             const { files, body } = req;
             const { failed, message } = validateValues(body);
+
             if (err || failed) throw handleError({ err, failed, msg: message });
-            const uploadedFiles = await handleFilesUpload(files);
-            const { error, ...project } = createProject({ ...body, ...uploadedFiles });
-            if (error) throw new Error(error);
+
+            const uploadedFiles = await handleFilesUpload(files, body);
+            const project = createProject({ ...body, ...uploadedFiles });
             req.body = project;
             next()
         } catch (error) {
             console.error(error);
-            return res.status(500).json({ message: error.message });
+            return res.render('index', { error: true, success: false, message: error.message });
         }
     })
 }
 
-module.exports = { validateValues, createProject, uploadMiddleware };
+module.exports = { validateValues, createProject, uploadMiddleware, handleDelete };

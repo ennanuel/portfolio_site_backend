@@ -2,30 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.project_link:checked+label {
-    @apply bg-highlight-400 text-gray-900;
-}
-
-::-webkit-scrollbar {
-    @apply w-[10px];
-}
-
-::-webkit-scrollbar-thumb {
-    @apply rounded-md bg-highlight-500/30 border-2 border-gray-900;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    @apply bg-highlight-500/60;
-}
-
-::-webkit-scrollbar-track {
-    @apply bg-gray-900;
-}
-
-.invisible_scroll::-webkit-scrollbar-track {
-    background-color: transparent;
-}
-
 .rotate {
     animation: rotate 5s linear infinite;
 }
@@ -67,4 +43,14 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+.project:before {
+    content: "";
+    @apply absolute top-[5px] left-[5px] w-1 border border-gray-800 h-[calc(100%-10px)] bg-gray-800;
+}
+
+.project.dragging:before,
+.project:hover:before {
+    @apply bg-blue-500 border-blue-500;
 }

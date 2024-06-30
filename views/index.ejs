@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" href="/styles/style.css" />
+<link rel="icon" type="imag3/x-icon" href="./assets/icon-dark.png" />
+    <title>Projects</title>
+</head>
+<header></header>
+<body class="flex flex-col p-4 text-gray-800">
+    <% if(error || success) { %>
+        <div id="message" class="flex justify-start items-start gap-2 p-3 mb-4 border <%= success ? 'border-green-600 bg-green-200 text-green-600' : 'border-red-600 bg-red-200 text-red-600' %>">
+            <i class="fa fa-exclamation-triangle text-lg <%= success ? 'text-green-700' : 'text-red-700' %>" aria-hidden="true"></i>
+            <div class="flex flex-col flex-1">
+                <h2 class="text-lg font-bold <%= success ? 'text-green-700' : 'text-red-700' %>"><%= error ? 'Error' : 'Success' %></h2>
+                <p class="text-sm"><%= message %></p>
+            </div>
+            <button id="close_btn" class="flex items-center justify-center">
+                <i class="fa fa-plus rotate-45" aria-hidden="true"></i>
+            </button>
+        </div>
+    <% } %>
+    <div class="flex items-center justify-between gap-4 mb-4">
+        <h1 class="font-bold text-4xl">Projects</h1>
+        <a href="/project/add" class="flex p-[2px] bg-gradient-to-r from-blue-400 via-purple-500 to-red-600">
+            <span class="flex flex-1 px-3 h-[40px] items-center justify-center gap-3 hover:bg-transparent bg-white text-purple-500 hover:text-white bg-purple font-bold">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <span>Add project</span>
+            </span>
+        </a>
+    </div>
+    <div class="sticky z-10 top-0 py-4 flex flex-col gap-4 m-[1px] mb-0 bg-white border-b border-gray-800">
+        <div class="flex justify-between gap-4">
+            <div class="flex h-[40px] border border-gray-800 flex-1 max-w-[400px]">
+                <button type="button" class="flex items-center justify-center w-[40px] aspect-square" for="search">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+                <input type="text" placeholder="Search projects"
+                    class="h-[38px] bg-transparent m-0 pr-2 text-sm flex-1 outline-none">
+            </div>
+            <button type="button" class="flex h-[40px] items-center justify-center gap-2 px-3 border border-gray-800">
+                <i class="fa fa-sort" aria-hidden="true"></i>
+                <span class="text-xs font-bold">Alphabetical</span>
+                <i class="fa fa-angle-down" aria-hidden="true" class="pl-4 block"></i>
+            </button>
+        </div>
+        <div class="flex items-center justify-between gap-4">
+            <div class="flex gap-4 items-center">
+                <button type="button" class="flex h-[40px] items-center justify-center gap-2 px-3 border border-gray-800">
+                    <span class="text-xs font-bold">Any type</span>
+                    <i class="fa fa-angle-down" aria-hidden="true" class="pl-4 block"></i>
+                </button>
+                <button type="button" class="flex h-[40px] items-center justify-center gap-2 px-3 border border-gray-800">
+                    <span class="text-xs font-bold">Any codebase</span>
+                    <i class="fa fa-angle-down" aria-hidden="true" class="pl-4 block"></i>
+                </button>
+                <button type="button" class="flex h-[40px] items-center justify-center gap-2 px-3 border border-gray-800">
+                    <span class="text-xs font-bold">Any timeframe</span>
+                    <i class="fa fa-angle-down" aria-hidden="true" class="pl-4 block"></i>
+                </button>
+            </div>
+    
+            <div class="flex gap-4 items-center">
+                <button type="button"
+                    class="border border-gray-800 text-white bg-gray-800 h-[40px] aspect-square flex items-center justify-center">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                </button>
+                <button type="button"
+                    class="border border-gray-800 h-[40px] aspect-square flex items-center justify-center">
+                    <i class="fa fa-list-alt" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <form method="POST" action="/project/update/rank" class="mt-4 flex flex-col gap-4">
+        <div id="projects" class="flex flex-col gap-3 p-1">
+            <div class="flex flex-col items-center justify-center gap-2 h-[60vh] border border-gray-800">
+                <i class="fa fa-database text-[4rem]" aria-hidden="true"></i>
+                <p class="font-bold text-2xl mt-4">Loading...</p>
+                <p class="text-sm">Fetching projects from database...</p>
+            </div>
+            <a href="/project/10" class="hidden items-center gap-4 py-2 px-4 border-t border-gray-800 first:border-t-0">
+                <i class="fa fa-sort" aria-hidden="true"></i>
+                <span class="block w-[80px] aspect-square border border-gray-800"></span>
+                <div class="flex flex-col gap-1 flex-1">
+                    <div class="flex items-center gap-2 mb-2">
+                        <p class="text-base font-bold">A project</p>
+                        <p class="bg-gray-800 text-white text-xs font-bold px-2 pb-[2px]">main</p>
+                    </div>
+                    <p class="text-xs truncate">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas cumque qui
+                        tenetu...</p>
+                    <div class="flex items-center gap-2">
+                        <p class="text-xs border border-black px-2 pb-[2px]">React</p>
+                        <p class="text-xs border border-black px-2 pb-[2px]">Express</p>
+                        <p class="text-xs border border-black px-2 pb-[2px]">TypeScript</p>
+                        <p class="text-xs border border-black px-2 pb-[2px]">MongoDB</p>
+                    </div>
+                </div>
+                <p class="text-xs">01/01/2002</p>
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>
+        </div>
+        <button id="update_projects_rank_btn" class="hidden group sticky bottom-4 m-auto w-max p-[2px] bg-gradient-to-r from-green-400 via-blue-500 to-purple-600">
+            <span class="flex-1 flex items-center justify-center gap-2 px-3 h-[40px] bg-white text-blue-600 font-bold group-hover:bg-transparent group-hover:text-white">
+                <i class="fa fa-file" aria-hidden="true"></i>
+                <span>Save changes</span>
+            </span>
+        </button>
+    </form>
+</body>
+<script src="/script/fetchProjects.js">
+</script>
+</html>

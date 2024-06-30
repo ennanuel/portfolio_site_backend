@@ -4,7 +4,7 @@ const stacksContainer = document.getElementById('stacks_container');
 const iconInput = document.getElementById('icon');
 const imagesInput = document.getElementById('images');
 const projectIcon = document.getElementById('project_icon');
-const projectImages = document.getElementById('project_images');
+const projectImage = document.getElementById('project_image');
 
 function removeElement(e) {
     e.target.remove();
@@ -22,9 +22,9 @@ function addStack() {
     hiddenInput.setAttribute('type', 'hidden');
     hiddenInput.setAttribute('value', stack);
     hiddenInput.setAttribute('name', 'stacks[]');
-    icon.setAttribute('class', 'fa fa-minus');
-    closeBtn.setAttribute('class', 'h-[35px] aspect-square bg-highlight-500 text-gray-900 flex items-center justify-center pointer-events-none');
-    newStack.setAttribute('class', 'stack mb-4 gap-2 flex items-center justify-center border border-highlight-800 bg-highlight-500/10 rounded-sm pl-2');
+    icon.setAttribute('class', 'fa fa-plus rotate-45');
+    closeBtn.setAttribute('class', 'peer h-[30px] aspect-square text-red-600 border border-red-600 flex items-center justify-center pointer-events-none group-hover:text-white group-hover:bg-red-600');
+    newStack.setAttribute('class', 'stack group font-semibold flex-1 gap-2 pl-2 whitespace-nowrap mb-4 pr-[10px] h-[50px] border border-gray-800 flex items-center justify-between hover:text-red-600 hover:border-red-600');
     newStack.setAttribute('type', 'button');
     newStack.innerText = stack;
     closeBtn.appendChild(icon);
@@ -49,31 +49,18 @@ async function handleIconChange(e) {
         if (!e.target.files) return;
         const file = e.target.files[0];
         const imgSrc = await fetchFileURL(file);
-        projectIcon.style.opacity = '1';
         projectIcon.setAttribute('src', imgSrc);
     } catch (error) {
         console.error(error);
     }
 }
 
-async function addImage(file) {
-    const imgSrc = await fetchFileURL(file);
-    const container = document.createElement('div');
-    const img = document.createElement('img');
-    img.setAttribute('src', imgSrc);
-    img.setAttribute('class', 'aspect-square rounded-sm object-cover hover:opacity-80 pointer-events-none');
-    container.setAttribute('class', 'container rounded-md block p-1 border border-transparent hover:border-red-500');
-    container.appendChild(img);
-    projectImages.appendChild(container);
-}
-
-async function handleImageAdd(e) {
+async function handleImageChange(e) {
     try {
         if (!e.target.files) return;
-        const previousImages = projectImages.getElementsByClassName('container');
-        [...previousImages].forEach(elem => elem.removej());
-        const files = [...e.target.files];
-        files.map(addImage);
+        const file = e.target.files[0];
+        const imgSrc = await fetchFileURL(file);
+        projectImage.setAttribute('src', imgSrc)
     } catch (error) {
         console.error(error);
     }
@@ -81,4 +68,4 @@ async function handleImageAdd(e) {
 
 addStackBtn.addEventListener('click', addStack);
 iconInput.addEventListener('change', handleIconChange);
-imagesInput.addEventListener('change', handleImageAdd);
+imagesInput.addEventListener('change', handleImageChange);

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="icon" type="imag3/x-icon" href="./assets/icon-light.png" />
+    <title><%= name %></title>
+</head>
+<body class="h-[100vh] flex flex-col gap-4 p-4 text-gray-800">
+    <div class="flex items-start justify-between gap-4">
+        <div class="flex flex-col">
+            <div class="flex items-center gap-3">
+                <a href="/" class="flex items-center justify-center">
+                    <i class="fa fa-arrow-left text-lg" aria-hidden="true"></i>
+                </a>
+                <h1 class="text-3xl font-bold">Edit project</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <i class="fa fa-arrow-left text-lg opacity-0" aria-hidden="true"></i>
+                <p class="text-sm">Update project details...</p>
+            </div>
+        </div>
+        <div class="flex gap-4">
+            <button id="save_btn" class="group flex p-[2px] bg-gradient-to-r from-blue-400 to-blue-800">
+                <span
+                    class="h-[40px] bg-white px-3 flex items-center justify-center gap-2 font-bold text-blue-600 group-hover:text-white group-hover:bg-transparent">
+                    <i class="fa fa-file" aria-hidden="true"></i>
+                    <span>Save changes</span>
+                </span>
+            </button>
+            <form action="/project/delete/<%= id %>" method="POST" class="group flex p-[2px] bg-gradient-to-r from-red-400 to-red-800">
+                <span
+                    class="h-[40px] bg-white px-3 flex items-center justify-center gap-2 font-bold text-red-600 group-hover:text-white group-hover:bg-transparent">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    <span>Delete project</span>
+                </span>
+            </form>
+        </div>
+    </div>
+    <form id="project_form" method="POST" action="/project/edit/<%= id %>" enctype="multipart/form-data" class="flex flex-1 gap-4">
+        <div class="flex-1 flex flex-col gap-4">
+            <input type="text" name="name" value="<%= name %>" placeholder="Project title" class="text-lg font-bold px-4 h-[50px] border border-gray-800" />
+            <textarea name="desc" value="<%= desc %>" placeholder="Project description..." id="desc" class="flex-1 p-4 border border-gray-800">
+                <%= desc %>
+            </textarea>
+            <div class="flex gap-4">
+                <label for="icon" class="relative h-full aspect-square flex items-center justify-center border-2 border-gray-800 border-dashed">
+                    <img id="project-icon" src="<%= icon ? `https://res.cloudinary.com/dewej0c6m/${icon}` : '/assets/icon-light.png' %>" class="absolute w-full aspect-square object-cover" />
+                    <input type="file" name="icon" id="icon" class="hidden" multiple />
+                    <input type="hidden" class="hidden" name="old_icon[]" value="<%= icon %>" />
+                </label>
+                <div class="flex flex-1 flex-col gap-4">
+                    <input type="url" name="demo_link" value="<%= demo_link %>" class="border border-gray-800 h-[50px] px-4" placeholder="Demo URL">
+                    <div class="flex gap-4">
+                        <input type="url" name="code_link" value="<%= code_link %>" class="flex-1 h-[50px] border border-gray-800 px-4" placeholder="Codebase URL">     
+
+                        <input type="radio" class="hidden peer" <%= is_github_link ? 'checked' : '' %> id="github_link" value="true" name="is_github_link" />
+                        <label for="github_link" class="cursor-pointer peer-checked:bg-gray-800 peer-checked:text-white w-[50px] aspect-square border border-gray-800 flex items-center justify-center">
+                            <i class="fa fa-github text-lg" aria-hidden="true"></i>
+                        </label>
+
+                        <input type="radio" class="hidden peer/peer-2" <%= is_github_link ? '' : 'checked' %> id="codebase_link" value="false" name="is_github_link" />
+                        <label for="codebase_link" class="cursor-pointer peer-checked/peer-2:bg-gray-800 peer-checked/peer-2:text-white w-[50px] aspect-square border border-gray-800 flex items-center justify-center">
+                            <i class="fa fa-codepen text-lg" aria-hidden="true"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <input type="radio" value="true" <%= is_main_project ? 'checked' : '' %> name="is_main_project" id="main_project" class="peer hidden" />
+                <label for="main_project" class="cursor-pointer flex-1 peer-checked:bg-gray-800 peer-checked:text-white font-bold flex items-center justify-center px-4 h-[50px] border border-gray-800">Main project</label>
+
+                <input type="radio" value="false" <%= is_main_project ? '' : 'checked' %> name="is_main_project" id="secondary_project" class="peer/peer-2 hidden" />
+                <label for="secondary_project" class="cursor-pointer flex-1 peer-checked/peer-2:bg-gray-800 peer-checked/peer-2:text-white font-bold flex items-center justify-center h-[50px] px-4 border border-gray-800">Secondary project</label>
+            </div>
+        </div>
+        <div class="flex-1 flex flex-col">
+            <input type="file" id="images" name="images" class="hidden" multiple />
+            <label for="images" class="mb-4 border-2 border-dashed border-gray-800 text-white flex flex-col gap-2 items-center justify-center flex-1 relative">
+                <i class="fa fa-picture-o text-[4rem]" aria-hidden="true"></i>
+                <p class="font-bold">Choose image file</p>
+                <img 
+                    id="project-image" 
+                    src="<%= images ? `https://res.cloudinary.com/dewej0c6m/${(images[0] ? images[0] : icon)}` : '/assets/icon-light.png' %>" class='transition-opacity absolute w-full h-full object-cover' 
+                    alt=""
+                />
+                <% images.forEach(image => { %>
+                    <input type="hidden" name="old_images[]" value="<%= image %>" />
+                <% }) %>
+            </label>
+            <div id="stack_container" class="flex flex-wrap gap-x-4">
+                <% stacks.forEach((stack, index) => { %>
+                    <label class="remove_stack_btn group mb-4 hover:bg-gray-800 hover:text-white flex flex-1 border border-gray-800 items-center justify-center h-[50px]">
+                        <span class="font-bold px-3 flex-1 whitespace-nowrap pointer-events-none"><%= stack %></span>
+                        <button type="button" value="stack-<%= index %>" class="pointer-events-none cursor-pointer hover:text-white hover:bg-red-500 flex items-center justify-center h-[30px] w-[30px] border border-red-500 text-red-500 mr-[10px]">
+                            <i class="fa fa-plus rotate-45" aria-hidden="true"></i>
+                        </button>
+                        <input type="hidden" value="<%= stack %>" name="stacks[]" class="pointer-events-none" />
+                    </label>
+                <% }) %>
+            </div>
+            <div class="flex h-[50px] border border-gray-800">
+                <input type="text" id="stack_input" class="flex-1 px-3" placeholder="New stack">
+                <button id="add_stack_btn" type="button" class="flex items-center justify-center border-l border-black w-[50px]">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</body>
+<script src="/script/editProject.js"></script>
+</html>

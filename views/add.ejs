@@ -4,81 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="icon" type="image/x-icon" href="./assets/icon-dark.png" />
     <title>Upload Project</title>
 </head>
-<body class="h-[100vh] bg-gray-800 p-4 pt-0 pb-4 text-highlight-500 grid grid-rows-[auto,1fr] gap-4">
-    <header class="sticky top-0 mt-4">
-        <nav class="rounded-xl flex items-center justify-between h-[60px] gap-4">
-            <div class="flex items-center justify-center h-[60px] pr-1 aspect-square rounded-lg bg-gray-900 shadow shadow-black/50 border border-gray-800">
-                <img src="/icon-light.png" alt="logo" class="w-[40px] h-auto">
+<body class="h-[100vh] p-4">
+    <form action="/project/upload" method="POST" class="w-full h-full flex flex-col gap-6 text-gray-800" enctype="multipart/form-data">
+        <div class="flex flex-col">
+            <div class="flex items-center gap-3">
+                <a href="/" class="flex items-center justify-center text-gray-900">
+                    <i class="fa fa-arrow-left text-lg" aria-hidden="true"></i>
+                </a>
+                <h1 class="text-4xl font-bold flex-1">Add project</h1>
+                <button class="flex p-[2px] bg-gradient-to-r from-blue-400 via-purple-500 to-red-600">
+                    <span
+                        class="flex flex-1 px-3 h-[40px] items-center justify-center gap-2 hover:bg-transparent bg-white text-purple-500 hover:text-white bg-purple font-bold">
+                        <i class="fa fa-check-circle" aria-hidden="true"></i>
+                        <span>Create project</span>
+                    </span>
+                </button>
             </div>
-            <ul class="flex flex-1 justify-center items-center gap-4 h-[60px] px-4 rounded-lg bg-gray-900 border border-gray-800 shadow shadow-black/50">
-                <a href="/project/page/add" class="font-semibold h-[40px] px-4 rounded-sm bg-highlight-400 text-gray-900 flex justify-center items-center">Add Project</a>
-                <a href="/project/page/edit" class="font-semibold h-[40px] px-4 rounded-sm bg-highlight-400/10 text-highlight-700 flex justify-center items-center">View Projects</a>
-            </ul>
-            <button class="flex items-center justify-center gap-2 aspect-square w-[60px] px-4 rounded-lg bg-highlight-400 font-bold text-gray-900  border border-gray-800 shadow shadow-black/50">
-                <i class="fa fa-external-link text-2xl"></i>
-            </button>
-        </nav>
-    </header>
-    <section class="bg-gray-900 rounded-md p-4 h-full overflow-y-scroll overflow-x-clip">
-        <form action="/project/upload" method="POST" class="w-full flex flex-col gap-4" enctype="multipart/form-data">
-            <div class="flex items-center justify-between">
-                <h3 class="text-3xl font-bold">Add Project</h3>
-                <button class="font-bold px-4 rounded-md py-2 bg-highlight-400 text-gray-900">Save Project</button>
+            <div class="flex items-center gap-3">
+                <a href="/" class="flex items-center justify-center text-gray-900">
+                    <i class="fa fa-arrow-left text-lg opacity-0" aria-hidden="true"></i>
+                </a>
+                <p>Upload a new project...</p>
             </div>
-            <div class="flex flex-col-reverse lg:flex-row gap-4 justify-stretch mt-4">
-                <div class="flex flex-1 flex-col gap-4">
-                    <input type="text" name="name" placeholder="Name" class="bg-highlight-500/10 block px-4 h-[50px] rounded-md placeholder:text-highlight-500 shadow shadow-black/40" />
-                    <textarea name="desc" placeholder="Description" class="bg-highlight-500/10 block px-4 py-2 h-[100px] rounded-md placeholder:text-highlight-500 shadow shadow-black/40"></textarea>
-                    <input type="url" name="demo_link" placeholder="Demo Link" class="bg-highlight-500/10 block px-4 h-[50px] rounded-md placeholder:text-highlight-500 shadow shadow-black/40" />
-                    <div class="flex gap-4">
-                        <input type="url" name="code_link" placeholder="Codebase Link" class="bg-highlight-500/10 flex-1 block px-4 h-[50px] rounded-md placeholder:text-highlight-500 shadow shadow-black/40" />
-                        <input type="radio" id="is_github" value="true" name="is_github_link" checked="true" class="project_link hidden" />
-                        <label for="is_github" class="cursor-pointer bg-highlight-500/10 flex items-center justify-center px-4 h-[50px] w-[50px] rounded-md placeholder:text-highlight-500">
-                            <i class="fa fa-github text-2xl"></i>
-                        </label>
-                        <input type="radio" id="is_codepen" value="false" name="is_github_link" class="project_link hidden" />
-                        <label for="is_codepen" class="cursor-pointer bg-highlight-500/10 flex items-center justify-center px-4 h-[50px] w-[50px] rounded-md placeholder:text-highlight-500">
-                            <i class="fa fa-codepen text-2xl"></i>
-                        </label>
-                    </div>
-                    <div class="flex gap-4">
-                        <input type="stack" placeholder="Stacks Used" id="stack" class="flex-1 bg-highlight-500/10 block px-4 h-[50px] rounded-md placeholder:text-highlight-500" />
-                        <button type="button" id="add_btn" class="bg-highlight-500 text-gray-900 font-bold block px-4 h-[50px] aspect-square rounded-md placeholder:text-highlight-500"><i class="fa fa-plus"></i></button>
-                    </div>
-                    <div class="flex flex-col">
-                        <div id="stacks_container" class="flex gap-x-4 flex-wrap">
-                            <button class="hidden mb-4 gap-2 border-highlight-800 pl-2 border-transparent hover:border-red-500 hover:opacity-80 h-[35px] pointer-events-none">
-                            </button>
-                        </div>
-                        <div class="flex gap-4">
-                            <input type="radio" id="is_main" value="true" name="is_main_project" checked="true" class="project_link hidden" />
-                            <label for="is_main" class="cursor-pointer flex-1 bg-highlight-500/10 flex items-center justify-center gap-1 px-4 h-[50px] rounded-md placeholder:text-highlight-500">Main Project</label>
-                            <input type="radio" id="is_sec" value="false" name="is_main_project" class="project_link hidden" />
-                            <label for="is_sec" class="cursor-pointer flex-1 bg-highlight-500/10 flex items-center justify-center gap-1 px-4 h-[50px] rounded-md placeholder:text-highlight-500">Other Project</label>
-                        </div>  
-                    </div>               
-                </div>
-                <div class="flex flex-1 flex-col gap-4">
-                    <h3 class="text-2xl font-bold">Project Icon</h3>
-                    <label for="icon" class="cursor-pointer relative w-[100px] aspect-square flex flex-col items-center justify-center gap-2 border border-dashed bg-highlight-500/10 rounded-md">
-                        <p class="font-semibold">Add Image</p>
+        </div>
+        <div class="flex flex-1 gap-4">
+            <div class="flex-1 flex flex-col gap-4">
+                <input type="text" name="name" placeholder="Name" class="px-4 h-[50px] border border-gray-800 text-gray-800" />
+                <textarea name="desc" placeholder="Description" class="p-4 flex-1 border border-gray-800 text-gray-800"></textarea>
+                <div class="flex gap-4">
+                    <label for="icon" class="relative h-full aspect-square border-2 border-gray-800 border-dashed flex items-center justify-center">
+                        <p class="font-semibold text-center text-sm px-3">Upload icon</p>
                         <input type="file" name="icon" id="icon" class="hidden file" accept="image/jpeg, image/png, image/jpg" />
-                        <img id="project_icon" src="" alt="" class="absolute top-0 left-0 h-full w-full object-cover opacity-0">
+                        <img id="project_icon" alt="" class="absolute top-0 left-0 h-full w-full object-cover">
                     </label>
-                    <h3 class="text-2xl font-bold mt-4">Project Images</h3>
-                    <label id="project_images" class="grid grid-cols-3 gap-4">
-                        <div for="images" class="cursor-pointer aspect-square w-full flex flex-col items-center justify-center gap-2 border border-dashed bg-highlight-500/10 rounded-md">
-                            <p class="font-semibold">Add Image</p>
-                            <input type="file" id="images" name="images" class="hidden file" accept="image/jpeg, image/png, image/jpg" multiple />
+                    <div class="flex flex-1 flex-col gap-4">
+                        <input type="url" name="demo_link" placeholder="Demo Link" class="px-4 h-[50px] border border-gray-800 text-gray-800" />
+                        <div class="flex gap-4">
+                            <input type="url" name="code_link" placeholder="Codebase Link" class="px-4 flex-1 h-[50px] border border-gray-800 text-gray-800" />
+
+                            <input type="radio" id="is_github" value="true" name="is_github_link" checked class="peer hidden" />
+                            <label for="is_github" class="cursor-pointer flex items-center justify-center px-4 h-[50px] w-[50px] border border-gray-800 peer-checked:bg-gray-800 peer-checked:text-white">
+                                <i class="fa fa-github text-xl"></i>
+                            </label>
+
+                            <input type="radio" id="is_codepen" value="false" name="is_github_link" class="peer/peer-2 hidden" />
+                            <label for="is_codepen" class="cursor-pointer flex items-center justify-center px-4 h-[50px] w-[50px] border border-gray-800 peer-checked/peer-2:bg-gray-800 peer-checked/peer-2:text-white">
+                                <i class="fa fa-codepen text-xl"></i>
+                            </label>
                         </div>
-                    </label>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <input type="radio" id="is_main" value="true" name="is_main_project" checked class="peer hidden" />
+                    <label for="is_main" class="cursor-pointer flex-1 h-[50px] px-4 flex items-center justify-center border border-gray-800 peer-checked:bg-gray-800 peer-checked:text-white font-bold">Main Project</label>
+
+                    <input type="radio" id="is_sec" value="false" name="is_main_project" class="peer/peer-2 hidden" />
+                    <label for="is_sec" class="cursor-pointer flex-1 h-[50px] px-4 flex items-center justify-center border border-gray-800 peer-checked/peer-2:bg-gray-800 peer-checked/peer-2:text-white font-bold">Other Project</label>
                 </div>
             </div>
-        </form>
-    </section>
+            <div class="flex-1 flex flex-col">
+                <label for="images" class="relative flex-1 flex items-center justify-center p-4 mb-4 gap-4 border-2 border-dashed border-gray-800">
+                    <div class="cursor-pointer flex flex-col items-center justify-center text-gray-800">
+                        <i class="fa fa-upload text-4xl" aria-hidden="true"></i>
+                        <p class="font-bold text-2xl">Add project image</p>
+                        <input type="file" id="images" name="images" class="hidden file" accept="image/jpeg, image/png, image/jpg" multiple />
+                    </div>
+                    <img alt="" id="project_image" class="absolute w-full h-full object-cover">
+                </label>
+                <div id="stacks_container" class="flex gap-x-4 flex-wrap">
+                    <button class="hidden group mb-4 gap-2 pl-3 pr-[10px] h-[40px] border border-gray-700 items-center justify-between whitespace-nowrap hover:text-red-600 hover:border-red-600">
+                        <span class="group-hover:text-white group-hover:bg-red-600"></span>
+                    </button>
+                </div>
+                <div class="flex gap-4">
+                    <input type="text" placeholder="Stacks Used" id="stack" class="flex-1 px-4 h-[50px] border border-gray-800 text-gray-800" />
+                    <button type="button" id="add_btn" class="px-4 h-[50px] aspect-square bg-gray-800 text-white">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
 </body>
-<script src="/script.js"></script>
+<script src="/script/addProject.js"></script>
 </html>
