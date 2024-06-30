@@ -4,6 +4,20 @@ const { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, getDoc, setDo
 
 const { uploadMiddleware, handleDelete } = require('../utils/upload');
 
+const DEFAULT_PROJECT_DATA = {
+    id: "",
+    name: "",
+    desc: "",
+    code_link: "",
+    demo_link: "",
+    icon: "",
+    images: [],
+    stacks: [],
+    is_github_link: true,
+    is_main_project: true,
+    rank: 0
+}
+
 initializeApp({
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -38,7 +52,7 @@ router.get('/:id', authentication, async function (req, res) {
 
         if (!projectDoc) throw new Error("No project found!");
 
-        const project = { ...projectDoc.data(), id: projectDoc.id };
+        const project = { ...DEFAULT_PROJECT_DATA, ...projectDoc.data(), id: projectDoc.id };
 
         return res.render('project', project);
     } catch (error) {
